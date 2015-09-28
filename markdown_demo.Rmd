@@ -1,0 +1,34 @@
+---
+html_document:
+  highlight: zenburn
+author: "Nikolay Iskrev"
+date: "September 27, 2015"
+output: html_document
+title: "My first markdown file"
+---
+
+Here, I am going to load some data
+
+```{r}
+library(datasets)
+data("airquality")
+summary(airquality)
+```
+
+First, make a pairs plot
+```{r}
+pairs(airquality)
+
+```
+
+```{r fit model}
+library(stats)
+fit <- lm(Ozone ~ Wind + Solar.R + Temp, data = airquality)
+```
+
+Here is a regression model of ozone on wind, solar radiation, and temperature
+```{r showtable, results="asis"}
+library(xtable)
+xt<-xtable(summary(fit))
+print(xt, type="html")
+```
